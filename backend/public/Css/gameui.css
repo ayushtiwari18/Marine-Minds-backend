@@ -1,0 +1,86 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    23deg,
+    rgba(0, 0, 0, 1) 37%,
+    rgba(0, 129, 222, 1) 73%,
+    rgba(0, 129, 222, 0.975371545102416) 100%
+  );
+  font-family: Arial, sans-serif;
+  min-height: 100vh; /* Ensures body is at least full viewport height */
+  display: flex;
+  flex-direction: column; /* Makes the footer stay at the bottom */
+  overflow-x: hidden;
+}
+.container-game-ui {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 50%;
+  max-width: 1200px;
+  margin: 60px auto;
+}
+.icon-container {
+  text-align: center;
+}
+.icon {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.button-game-ui {
+  display: inline-block;
+  background-color: #0066cc;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+.button-game-ui:hover {
+  background-color: #0055a5;
+}
+.flash-message {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #004080;
+  color: white;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  display: none;
+  z-index: 10;
+}
+/* #footer-section {
+  margin-top: auto;
+  width: 100%;
+
+  padding: 1rem;
+  text-align: center;
+} */
+@media (max-width: 768px) {
+  .container-game-ui {
+    grid-template-columns: repeat(2, 1fr);
+    width: 70%;
+  }
+}
+@media (max-width: 480px) {
+  .container-game-ui {
+    grid-template-columns: 1fr;
+    width: 90%;
+  }
+}

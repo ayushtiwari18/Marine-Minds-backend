@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marine minds</title>
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .custom-scrollbar {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      bottom: 20px;
+      width: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+    }
+
+    .scroll-thumb {
+      position: absolute;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+    }
+
+    .scroll-numbers {
+      position: absolute;
+      left: -50px;
+      width: 40px;
+      text-align: right;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    @keyframes square-animation {
+      0% {
+        left: 0;
+        top: 0;
+      }
+
+      10.5% {
+        left: 0;
+        top: 0;
+      }
+
+      12.5% {
+        left: 32px;
+        top: 0;
+      }
+
+      23% {
+        left: 32px;
+        top: 0;
+      }
+
+      25% {
+        left: 64px;
+        top: 0;
+      }
+
+      35.5% {
+        left: 64px;
+        top: 0;
+      }
+
+      37.5% {
+        left: 64px;
+        top: 32px;
+      }
+
+      48% {
+        left: 64px;
+        top: 32px;
+      }
+
+      50% {
+        left: 32px;
+        top: 32px;
+      }
+
+      60.5% {
+        left: 32px;
+        top: 32px;
+      }
+
+      62.5% {
+        left: 32px;
+        top: 64px;
+      }
+
+      73% {
+        left: 32px;
+        top: 64px;
+      }
+
+      75% {
+        left: 0;
+        top: 64px;
+      }
+
+      85.5% {
+        left: 0;
+        top: 64px;
+      }
+
+      87.5% {
+        left: 0;
+        top: 32px;
+      }
+
+      98% {
+        left: 0;
+        top: 32px;
+      }
+
+      100% {
+        left: 0;
+        top: 0;
+      }
+    }
+
+    @keyframes hue-rotate {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+
+      100% {
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #121314;
+    }
+
+    .loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 96px;
+      height: 96px;
+      transform: rotate(45deg);
+      animation: hue-rotate 10s linear infinite both;
+    }
+
+    .loading__square {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      margin: 2px;
+      border-radius: 2px;
+      background: #07a;
+      background-image: linear-gradient(45deg, #fa0 40%, #0c9 60%);
+      background-size: cover;
+      animation: square-animation 10s ease-in-out infinite both;
+    }
+
+    .loading__square:nth-of-type(0) {
+      animation-delay: 0s;
+    }
+
+    .loading__square:nth-of-type(1) {
+      animation-delay: -1.4285714286s;
+    }
+
+    .loading__square:nth-of-type(2) {
+      animation-delay: -2.8571428571s;
+    }
+
+    .loading__square:nth-of-type(3) {
+      animation-delay: -4.2857142857s;
+    }
+
+    .loading__square:nth-of-type(4) {
+      animation-delay: -5.7142857143s;
+    }
+
+    .loading__square:nth-of-type(5) {
+      animation-delay: -7.1428571429s;
+    }
+
+    .loading__square:nth-of-type(6) {
+      animation-delay: -8.5714285714s;
+    }
+
+    .loading__square:nth-of-type(7) {
+      animation-delay: -10s;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fixed bottom-4 left-4 flex space-x-4">
+    <button onclick="navigateBack()" class="bg-white text-black px-4 py-2 rounded">
+      Back
+    </button>
+    <button onclick="navigateHome()" class="bg-white text-black px-4 py-2 rounded">
+      Home
+    </button>
+  </div>
+
+  <!-- Loader -->
+  <div class="loading" id="loading">
+    <div class="loading__square"></div>
+    <div class="loading__square"></div>
+    <div class="loading__square"></div>
+    <div class="loading__square"></div>
+    <div class="loading__square"></div>
+    <div class="loading__square"></div>
+    <div class="loading__square"></div>
+  </div>
+
+  <div class="w-full bg-zinc-900">
+    <div class="parent relative top-0 left-0 w-full h-[2500vh]">
+      <div class="w-full sticky top-0 left-0 h-screen">
+        <canvas class="w-full h-screen" id="frame"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-scrollbar">
+    <div class="scroll-thumb"></div>
+    <div class="scroll-numbers"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script>
+    const canvas = document.querySelector("canvas");
+    const context = canvas.getContext("2d");
+
+    const frames = { currentIndex: 0, maxIndex: 7552 }; // Total number of frames
+    let loadedImages = {}; // Cache for preloaded images
+    let currentFrame = 0;
+    let isScrolling = false;
+    let preloadBuffer = 10; // Number of frames to preload ahead and behind
+
+    // Function to load images and draw them
+    function loadImage(index) {
+      const imageUrl = `https://my-threejs-3d-models.s3.amazonaws.com/foodChainFrames/frame_${index
+        .toString()
+        .padStart(4, "0")}.jpeg`;
+
+      // Check if the image is already loaded in the cache
+      if (loadedImages[index]) {
+        drawImage(loadedImages[index]);
+      } else {
+        // Load image if not in cache
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => {
+          loadedImages[index] = img;
+          drawImage(img);
+          preloadNearbyFrames(index); // Preload frames around the current frame
+        };
+      }
+    }
+
+    function drawImage(img) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const scaleX = canvas.width / img.width;
+      const scaleY = canvas.height / img.height;
+      const scale = Math.min(scaleX, scaleY); // Maintain aspect ratio
+
+      const newWidth = img.width * scale;
+      const newHeight = img.height * scale;
+
+      const offsetX = (canvas.width - newWidth) / 2;
+      const offsetY = (canvas.height - newHeight) / 2;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
+      context.drawImage(img, offsetX, offsetY, newWidth, newHeight);
+      frames.currentIndex = currentFrame;
+    }
+
+    // Preload frames around the current index to ensure smooth transitions
+    function preloadNearbyFrames(index) {
+      for (let i = 1; i <= preloadBuffer; i++) {
+        if (index + i <= frames.maxIndex && !loadedImages[index + i]) {
+          preloadImage(index + i);
+        }
+        if (index - i >= 0 && !loadedImages[index - i]) {
+          preloadImage(index - i);
+        }
+      }
+    }
+
+    function preloadImage(index) {
+      const imageUrl = `https://my-threejs-3d-models.s3.amazonaws.com/foodChainFrames/frame_${index
+        .toString()
+        .padStart(4, "0")}.jpeg`;
+
+      if (!loadedImages[index]) {
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => {
+          loadedImages[index] = img;
+        };
+      }
+    }
+
+    // Use requestAnimationFrame to update the frame on scroll
+    function startAnimation() {
+      ScrollTrigger.create({
+        trigger: ".parent",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: function (self) {
+          if (!isScrolling) {
+            requestAnimationFrame(() => updateFrame(self.progress));
+            isScrolling = true;
+          }
+        },
+      });
+    }
+
+    function updateFrame(progress) {
+      const index = Math.floor(
+        gsap.utils.mapRange(0, 1, 0, frames.maxIndex, progress)
+      );
+      if (index !== currentFrame) {
+        currentFrame = index;
+        loadImage(currentFrame);
+      }
+      isScrolling = false; // Allow new frames to be drawn after current frame is rendered
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      loadImage(currentFrame); // Redraw current frame on resize
+    });
+
+    // Start the animation and preload the initial set of frames
+    startAnimation();
+    preloadNearbyFrames(0); // Initial preload
+
+  </script>
+</body>
+
+</html>

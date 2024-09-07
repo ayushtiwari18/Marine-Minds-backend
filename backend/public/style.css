@@ -1,0 +1,178 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.main-section,
+.section {
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section {
+  align-items: center;
+}
+
+#Footer-section {
+  min-height: auto; /* Allow footer to take its natural height */
+  padding-bottom: 20px; /* Add some padding at the bottom */
+}
+
+/* Ensure the last section before the footer has some bottom padding */
+.section:nth-last-child(2) {
+  padding-bottom: 50px;
+}
+
+#Card-Section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* padding: 50px 20px; */
+  /* background-color: #f4f4f4; */
+}
+
+.hall-item {
+  display: inline-block;
+  margin: 20px;
+  background: #ffffff;
+  border: 2px solid #00796b;
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+}
+
+.hall-item img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.hall-item h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.hall-item p {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.faq-answer.active {
+  display: block;
+  max-height: 1000px;
+  opacity: 1;
+}
+/* Footer Section Styling */
+#Footer-section {
+  /* background-color: #263238; */
+  color: #cfd8dc;
+  padding: 20px;
+  text-align: center;
+}
+
+#Footer-section p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+#Footer-section a {
+  /* color: #ffab00; */
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+#Footer-section a:hover {
+  text-decoration: underline;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    23deg,
+    rgba(0, 0, 0, 1) 37%,
+    rgba(0, 129, 222, 1) 73%,
+    rgba(0, 129, 222, 0.975371545102416) 100%
+  );
+  font-family: Arial, sans-serif;
+  min-height: 100vh; /* Ensures body is at least full viewport height */
+  display: flex;
+  flex-direction: column; /* Makes the footer stay at the bottom */
+  overflow-x: hidden;
+}
+.container-dive {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 50%;
+  max-width: 1200px;
+  margin: 60px auto;
+}
+.icon-container {
+  text-align: center;
+}
+.icon {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.button {
+  display: inline-block;
+  background-color: #0066cc;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #0055a5;
+}
+.flash-message {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #004080;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  display: none;
+  z-index: 10;
+}
+#footer-section {
+  margin-top: auto; /* Pushes footer to the bottom */
+  width: 100%;
+
+  padding: 1rem;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    width: 70%;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: 1fr;
+    width: 90%;
+  }
+}
